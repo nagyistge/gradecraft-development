@@ -53,5 +53,12 @@ namespace :grades do
       puts "Updating #{ActionController::Base.helpers.pluralize grades.count, "ungraded grade"} with user #{user.name}..."
       grades.update_all(graded_by_id: user.id)
     end
+
+    desc "Update grades without a graded at timestamp to be graded by their updated at timestamp"
+    task update_missing_timestamps: :environment do
+      grades = Grade.where(graded_at: nil)
+      puts "Updating #{ActionController::Base.helpers.pluralize grades.count, "grade"} with missing timestamps..."
+      grades.update_all("graded_at=updated_at")
+    end
   end
 end
