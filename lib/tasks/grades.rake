@@ -30,4 +30,13 @@ namespace :grades do
       prediction.save
     end
   end
+
+  namespace :remove_empty_grades do
+    desc "Deletes any grade that has a predicted score greater than 0"
+    task delete_predicted_grades: :environment do
+      grades = Grade.where("predicted_score > 0")
+      puts "Deleting #{pluralize grades.count, "predicted grade"}..."
+      grades.destroy_all
+    end
+  end
 end
