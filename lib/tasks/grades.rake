@@ -38,5 +38,12 @@ namespace :grades do
       puts "Deleting #{pluralize grades.count, "predicted grade"}..."
       grades.destroy_all
     end
+
+    desc "Deletes any grade without raw points or feedback"
+    task delete_empty_grades: :environment do
+      grades = Grade.where(raw_points: nil, feedback: nil)
+      puts "Deleting #{pluralize grades.count, "empty grade"}..."
+      grades.destroy_all
+    end
   end
 end
