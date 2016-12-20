@@ -35,15 +35,23 @@ namespace :grades do
     desc "Deletes any grade that has a predicted score greater than 0"
     task delete_predicted_grades: :environment do
       grades = Grade.where("predicted_score > 0")
-      puts "Deleting #{pluralize grades.count, "predicted grade"}..."
+      puts "Deleting #{ActionController::Base.helpers.pluralize grades.count, "predicted grade"}..."
       grades.destroy_all
     end
 
     desc "Deletes any grade without raw points or feedback"
     task delete_empty_grades: :environment do
       grades = Grade.where(raw_points: nil, feedback: nil)
-      puts "Deleting #{pluralize grades.count, "empty grade"}..."
+      puts "Deleting #{ActionController::Base.helpers.pluralize grades.count, "empty grade"}..."
       grades.destroy_all
+    end
+
+    desc "Update grades without a graded by id to be graded by user id 1"
+    task update_ungraded_grades: :environment do
+      user = User.find 1
+      grades = Grade.where(graded_by_id: nil)
+      puts "Updating #{ActionController::Base.helpers.pluralize grades.count, "ungraded grade"} with user #{user.name}..."
+      grades.update_all(graded_by_id: user.id)
     end
   end
 end
