@@ -171,7 +171,6 @@ describe Grade do
     it "saves the grades as zero" do
       subject.save!
       expect(subject.raw_points).to be 0
-      expect(subject.predicted_score).to be <= 1
       expect(subject.final_points).to be 0
       expect(subject.full_points).to be 0
     end
