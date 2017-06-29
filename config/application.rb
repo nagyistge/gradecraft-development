@@ -16,6 +16,8 @@ module GradeCraft
 
     config.active_job.queue_adapter = :resque
 
+    config.middleware.insert_before 0, "Middleware::OauthStateMiddleware"
+
     config.i18n.enforce_available_locales = true
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
     config.angular_templates.ignore_prefix  = %w(angular/templates/)
