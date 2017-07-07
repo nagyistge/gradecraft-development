@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170622131838) do
+ActiveRecord::Schema.define(version: 20170707122502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -556,6 +556,14 @@ ActiveRecord::Schema.define(version: 20170622131838) do
     t.string   "launch_url"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "oauth_states", force: :cascade do |t|
+    t.string   "state"
+    t.text     "payload"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["state"], name: "index_oauth_states_on_state", using: :btree
   end
 
   create_table "predicted_earned_badges", force: :cascade do |t|

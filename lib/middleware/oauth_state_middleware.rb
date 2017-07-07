@@ -13,8 +13,6 @@ module Middleware
           state_params.each do |key, value|
             request.update_param(key, value)
           end
-          application_instance = ApplicationInstance.find_by(lti_key: state_params["oauth_consumer_key"])
-          env["canvas.url"] = application_instance.lti_consumer_uri
           oauth_state.destroy
         else
           raise OauthStateMiddlewareException, "Invalid state in OAuth callback"
