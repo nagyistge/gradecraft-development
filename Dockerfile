@@ -16,8 +16,8 @@ COPY . /gradecraft
 RUN cp /intermidiate/gradecraft_saml_idp.pem /gradecraft/gradecraft_saml_idp.pem
 RUN cp /intermidiate/gcsha256.key /gradecraft/gcsha256.key
 RUN cp /intermidiate/gcsha256.crt /gradecraft/gcsha256.crt
-RUN cp /intermidiate/www.gradecraft.com.key /gradecraft/www.gradecraft.com.key
-RUN cp /intermidiate/www.gradecraft.com.crt /gradecraft/www.gradecraft.com.crt
+RUN cp /intermidiate/app.gradecraft.com.key /gradecraft/app.gradecraft.com.key
+RUN cp /intermidiate/app.gradecraft.com.crt /gradecraft/app.gradecraft.com.crt
 RUN cp /intermidiate/database.yml /gradecraft/config/database.yml
 RUN cp /intermidiate/mongoid.yml /gradecraft/config/mongoid.yml
 RUN cp /intermidiate/puma.rb /gradecraft/config/puma.rb
