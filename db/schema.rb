@@ -521,6 +521,12 @@ ActiveRecord::Schema.define(version: 20171005150420) do
     t.index ["name"], name: "index_institutions_on_name", using: :btree
   end
 
+  create_table "learning_objective_categories", force: :cascade do |t|
+    t.integer "course_id",                 null: false
+    t.string  "name",                      null: false
+    t.integer "allowable_yellow_warnings"
+  end
+
   create_table "level_badges", force: :cascade do |t|
     t.integer  "level_id"
     t.integer  "badge_id"
@@ -830,6 +836,7 @@ ActiveRecord::Schema.define(version: 20171005150420) do
   add_foreign_key "imported_assignments", "assignments"
   add_foreign_key "imported_grades", "grades"
   add_foreign_key "imported_users", "users"
+  add_foreign_key "learning_objective_categories", "courses"
   add_foreign_key "linked_courses", "courses"
   add_foreign_key "secure_tokens", "courses"
   add_foreign_key "secure_tokens", "users"
