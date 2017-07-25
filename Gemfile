@@ -11,6 +11,7 @@ gem 'acts_as_list'
 gem 'addressable'
 gem 'angularjs-rails', '~> 1.4.2'
 gem 'angular-rails-templates'
+gem "react_on_rails", "8.0.0"
 
 # zip utility for simple creation of zip files, pure ruby implementation
 # without the GC overhead of the Rubyzip library

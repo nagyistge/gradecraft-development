@@ -125,6 +125,7 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.5)
+    connection_pool (2.2.1)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     crass (1.0.2)
@@ -524,6 +525,8 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
+    rainbow (2.2.2)
+      rake
     rake (11.3.0)
     rake-hooks (1.2.3)
       rake
@@ -532,6 +535,12 @@ GEM
       nokogiri (>= 1.4.1)
       trollop
     rdiscount (2.2.0.1)
+    react_on_rails (8.0.0)
+      addressable
+      connection_pool
+      execjs (~> 2.5)
+      rails (>= 3.2)
+      rainbow (~> 2.1)
     record_tag_helper (1.0.0)
       actionview (~> 5.x)
     redis (3.3.1)
@@ -770,6 +779,7 @@ DEPENDENCIES
   rails_autolink
   rake-hooks
   rdiscount
+  react_on_rails (= 8.0.0)
   record_tag_helper
   remote_syslog_logger
   responders
