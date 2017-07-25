@@ -5,7 +5,7 @@ class AssignmentsController < ApplicationController
   include AssignmentsHelper
 
   before_action :ensure_staff?, except: [:show, :index]
-  before_action :use_current_course, only: [:index, :settings, :show, :new, :edit, :grades_review]
+  before_action :use_current_course, only: [:index, :settings, :show, :new, :edit, :grades_review, :predict]
 
   def index
     @assignment_types = @course.assignment_types.ordered.includes(:assignments)
@@ -49,6 +49,11 @@ class AssignmentsController < ApplicationController
 
   def edit
     @assignment = current_course.assignments.find(params[:id])
+  end
+
+  def predict
+    @assignment = Assignment.find(params[:id])
+    @props = { id: @assignment.id }
   end
 
   # Duplicate an assignment - important for super repetitive items like

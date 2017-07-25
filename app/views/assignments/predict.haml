@@ -1,0 +1,6 @@
+.pageContent
+  = render partial: "layouts/alerts"
+  %h2 Predict!
+  = react_component("GradeCraft", props: @props, prerender: false)
+
+

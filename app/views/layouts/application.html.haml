@@ -32,4 +32,5 @@
   = render partial: "layouts/background"
   = render partial: "layouts/google_analytics"
   = javascript_include_tag "application", "data-turbolinks-track" => true
+  = javascript_pack_tag 'webpack-bundle'
   = yield(:scripts)

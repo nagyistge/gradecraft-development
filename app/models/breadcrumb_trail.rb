@@ -85,6 +85,12 @@ class BreadcrumbTrail < Croutons::BreadcrumbTrail
     breadcrumb(objects[:assignment].name)
   end
 
+  def assignments_predict
+    assignments_index
+    breadcrumb(objects[:assignment].name)
+  end
+
+
   def assignments_edit
     assignments_index
     breadcrumb('Editing ' + objects[:assignment].name)

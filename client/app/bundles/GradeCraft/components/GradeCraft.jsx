@@ -3,7 +3,7 @@ import React from 'react';
 
 export default class GradeCraft extends React.Component {
   static propTypes = {
-    name: PropTypes.string.isRequired, // this is passed from the Rails view
+    id: PropTypes.string.isRequired, // this is passed from the Rails view
   };
 
   /**
@@ -15,31 +15,19 @@ export default class GradeCraft extends React.Component {
 
     // How to set initial state in ES6 class syntax
     // https://facebook.github.io/react/docs/reusable-components.html#es6-classes
-    this.state = { name: this.props.name };
+    this.state = { id: this.props.id };
   }
 
-  updateName = (name) => {
-    this.setState({ name });
+  updateName = (id) => {
+    this.setState({ id });
   };
 
   render() {
     return (
       <div>
         <h3>
-          Hello, {this.state.name}!
+          Assignment id: {this.state.id}
         </h3>
-        <hr />
-        <form >
-          <label htmlFor="name">
-            Say hello to:
-          </label>
-          <input
-            id="name"
-            type="text"
-            value={this.state.name}
-            onChange={(e) => this.updateName(e.target.value)}
-          />
-        </form>
       </div>
     );
   }

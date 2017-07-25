@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'hello_world', to: 'hello_world#index'
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   require "admin_constraint"
 
@@ -68,6 +67,7 @@ Rails.application.routes.draw do
 
     member do
       get "grades_review"
+      get "predict"
     end
 
     # routes for all grades that are associated with an assignment
