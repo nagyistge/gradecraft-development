@@ -1,6 +1,10 @@
 ENV["RAILS_ENV"] ||= "test"
 
 RSpec.configure do |config|
+  # Ensure that if we are running js tests, we are using latest webpack assets
+  # This will use the defaults of :js and :server_rendering meta tags
+  ReactOnRails::TestHelper.configure_rspec_to_compile_assets(config)
+
   config.filter_run :focus
   config.run_all_when_everything_filtered = true
 

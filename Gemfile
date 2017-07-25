@@ -153,3 +153,6 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-angular-dragdrop', '1.0.11'
   gem 'rails-assets-ngDraggable', '0.1.8'
 end
+
+gem 'mini_racer', platforms: :ruby
+gem 'webpacker_lite'

@@ -1,0 +1,6 @@
+web: bundle exec puma -p 5000
+redis: redis-server --port $REDIS_PORT
+resque_scheduler: bundle exec rake resque:scheduler
+resque_worker: bundle exec rake resque:work
+mongo: bundle exec mongod --dbpath=$MONGO_PATH --rest
+client: sh -c 'rm -rf public/webpack/development/* || true && cd client && bundle exec rake react_on_rails:locale && yarn run build:development'
