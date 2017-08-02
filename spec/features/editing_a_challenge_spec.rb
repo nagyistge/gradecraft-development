@@ -1,4 +1,4 @@
-feature "editing a challenge" , focus: true do
+feature "editing a challenge", feature: true, focus: true do
   context "as a professor" do
     let(:course) { build :course, has_team_challenges: true}
     let!(:course_membership) { create :course_membership, :professor, user: professor, course: course }

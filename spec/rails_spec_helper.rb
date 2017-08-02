@@ -54,7 +54,7 @@ RSpec.configure do |config|
 
   # If feature tests rely on pages with React, be sure to compile
   # all webpack resources.
-  ReactOnRails::TestHelper.configure_rspec_to_compile_assets(config)
+  ReactOnRails::TestHelper.configure_rspec_to_compile_assets(config, :feature)
 
   config.around(:each) do |example|
     DatabaseCleaner.cleaning do
