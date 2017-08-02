@@ -2,10 +2,6 @@ ENV["RAILS_ENV"] ||= "test"
 
 RSpec.configure do |config|
 
-  # If feature tests rely on pages with React, be sure to compile
-  # all webpack resources.
-  #ReactOnRails::TestHelper.configure_rspec_to_compile_assets(config)
-
   config.filter_run :focus
   config.run_all_when_everything_filtered = true
 

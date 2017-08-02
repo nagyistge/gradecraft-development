@@ -12,6 +12,9 @@ gem 'addressable'
 gem 'angularjs-rails', '~> 1.4.2'
 gem 'angular-rails-templates'
 gem "react_on_rails", "8.0.0"
+gem 'mini_racer', platforms: :ruby
+gem 'webpacker_lite'
+
 
 # zip utility for simple creation of zip files, pure ruby implementation
 # without the GC overhead of the Rubyzip library
@@ -153,6 +156,3 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-angular-dragdrop', '1.0.11'
   gem 'rails-assets-ngDraggable', '0.1.8'
 end
-
-gem 'mini_racer', platforms: :ruby
-gem 'webpacker_lite'
