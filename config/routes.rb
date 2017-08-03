@@ -512,7 +512,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :attendance, only: [:index, :create, :update]
+    resources :attendance, only: [:index, :create, :update, :destroy]
   end
 
   #19. Exports
