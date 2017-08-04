@@ -4,5 +4,6 @@
   "dependencies": {},
   "scripts": {
     "postinstall": "cd client && yarn install"
-  }
+  },
+  "engines" : { "node" : ">4.0" }
 }
