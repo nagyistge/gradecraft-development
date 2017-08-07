@@ -42,7 +42,6 @@
           = f.check_box :has_public_badges
           = f.label :has_public_badges, "Allow students to export badges earned in your course"
 
-
       .form-card
         .form-card-header
           = f.label :show_analytics, "Analytics"
@@ -66,7 +65,6 @@
           = f.input :max_assignment_types_weighted, input_html: { data: { autonumeric: true, "m-dec" => "0" }, type: "text" }, :label => "Is there a maximum number of assignment types they can weight?"
           = f.input :weight_term, {:label => "What do you want to call these weights/multipliers?"}
 
-
       .form-card
         .form-card-header
           = f.label :has_teams, "Sections"
@@ -79,7 +77,6 @@
           %a.button-close= glyph(:times)
           = f.check_box :team_score_average, {class: "feature-checkbox"}
           = f.label :team_score_average, "Allow sections' scores to be the average of their students' scores"
-
 
       .form-card
         .form-card-header
@@ -106,3 +103,19 @@
           %a.button-close= glyph(:times)
           = f.check_box :has_in_team_leaderboards
           = f.label :has_in_team_leaderboards, "Allow students to opt in to see in-section rankings and points (using pseudonyms to protect their privacy)"
+
+      .form-card
+        .form-card-header
+          = f.label :has_learning_objectives, "Learning Objectives"
+          = f.check_box :has_learning_objectives, {class: "feature-checkbox dependent-on-section has-settings-menu"}
+        .form-card-body
+          .feature-description{id: "txtSectionObjectives"} Students can demonstrate proficiency in the course by completing certain objectives.
+        .form-card-advanced-settings
+          %button.button-advanced-settings= glyph(:cog) + "Settings"
+        .advanced-settings-card
+          %a.button-close= glyph(:times)
+          = f.input :learning_objective_term, label: "What should learning objectives be called?", as: :select, collection: Course.learning_objective_terms.keys.to_a,
+            include_blank: false
+
+      .form-card.empty
+      .form-card.empty
