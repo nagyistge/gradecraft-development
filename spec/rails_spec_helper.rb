@@ -55,7 +55,7 @@ RSpec.configure do |config|
   # If feature tests rely on pages with React, be sure to compile all webpack resources.
   ReactOnRails::TestHelper.configure_rspec_to_compile_assets(config, :requires_webpack_assets)
   # tag any feature spec to trigger webpack build
-  config.define_derived_metadata(file_path: %r{spec/(features|controllers)}) do |metadata|
+  config.define_derived_metadata(file_path: %r{spec/}) do |metadata|
     metadata[:requires_webpack_assets] = true
   end
 
