@@ -12,6 +12,11 @@ class API::AssignmentTypeWeightsController < ApplicationController
       assignment_type_weight.weight = weight
       assignment_type_weight.save
 
+      # update any existing grades
+      assignment_type.assignments.each do |assignment|
+        Grade.where(assignment: assignment, student: current_user).each(&:save!)
+      end
+
       if assignment_type_weight.valid?
         render json: {
           id: assignment_type_weight.id,
