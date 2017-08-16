@@ -102,6 +102,26 @@ A student's score for the entire course is stored on the `CourseMembership`, and
 
 (1) + (2) + (3) = student's score for course
 
+The callback stack (which should be re-factored ) that recalculates the course score, looks like this (as of 8/16/17):
+
+    action : grade.destroy || enqueue GradeUpdaterJob > GradeUpdatePerformer
+    ------------------------------------------------------------------------
+    Grade.update_student_and_team_scores
+      V
+    User#update_course_score_and_level
+      V
+    CourseMembership#recalculate_and_update_student_score
+      v
+      #recalculated_student_score
+        v
+      #assignment_type_totals_for_student ( + #student_earned_badge_score + #conditional_student_team_score )
+        V
+    AssignmentType#visible_score_for_student
+      v
+      #summed_highest_scores_for || #max_points_for_student || #score_for_student
+      v
+      (some variation of: visible Grades pluck "score" and sum)
+
 ### predicted scores
 
 Students make predictions for their final scores for each `Assignment` and `Challenge`. These are stored on prediction models as `predicted_score`
