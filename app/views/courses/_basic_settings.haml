@@ -110,12 +110,6 @@
           = f.check_box :has_learning_objectives, {class: "feature-checkbox dependent-on-section has-settings-menu"}
         .form-card-body
           .feature-description{id: "txtSectionObjectives"} Students can demonstrate proficiency in the course by completing certain objectives.
-        .form-card-advanced-settings
-          %button.button-advanced-settings= glyph(:cog) + "Settings"
-        .advanced-settings-card
-          %a.button-close= glyph(:times)
-          = f.input :learning_objective_term, label: "What should learning objectives be called?", as: :select, collection: Course.learning_objective_terms.keys.to_a,
-            include_blank: false
 
       .form-card.empty
       .form-card.empty
