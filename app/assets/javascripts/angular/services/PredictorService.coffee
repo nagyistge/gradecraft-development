@@ -57,8 +57,7 @@
       subset = assignmentsForAssignmentType(assignments,assignmentType.id)
       total = AssignmentService.assignmentsSubsetPredictedPoints(subset)
     else
-      # Use weighted calculation sent from API
-      total = weightedEarnedPoints(assignmentType)
+      total = assignmentType.final_points_for_student
 
     if includeWeights
       total = weightedPoints(assignmentType, total)
