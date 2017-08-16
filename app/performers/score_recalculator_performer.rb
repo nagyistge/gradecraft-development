@@ -8,7 +8,7 @@ class ScoreRecalculatorPerformer < ResqueJob::Performer
   # perform() attributes assigned to @attrs in the ResqueJob::Base class
   def do_the_work
     # TODO: write model specs for cache_course_score outcomes
-    require_success(messages) { @student.cache_course_score_and_level(@course_id) }
+    require_success(messages) { @student.update_course_score_and_level(@course_id) }
   end
 
   protected

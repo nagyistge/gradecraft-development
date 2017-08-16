@@ -718,6 +718,6 @@ end
 
 @students.each do |s|
   s.courses.each do |c|
-    s.cache_course_score_and_level(c.id)
+    s.update_course_score_and_level(c.id)
   end
 end

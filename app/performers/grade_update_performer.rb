@@ -13,7 +13,7 @@ class GradeUpdatePerformer < ResqueJob::Performer
 
   def require_save_scores_success
     require_success(save_scores_messages) do
-      @grade.cache_student_and_team_scores
+      @grade.update_student_and_team_scores
     end
   end
 

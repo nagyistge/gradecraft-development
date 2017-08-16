@@ -6,8 +6,8 @@ describe User do
   let(:assignment) { create(:assignment, course: course) }
   let(:grade) { create(:grade, assignment: assignment, course: course, student: student) }
 
-  describe "#cache_course_score_and_level" do
-    subject { student.cache_course_score_and_level(course.id) }
+  describe "#update_course_score_and_level" do
+    subject { student.update_course_score_and_level(course.id) }
 
     context "course membership is present" do
       before(:each) { allow(student).to receive(:course_membership) { course_membership } }

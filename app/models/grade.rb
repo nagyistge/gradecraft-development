@@ -41,7 +41,7 @@ class Grade < ActiveRecord::Base
 
   delegate :name, :description, :due_at, :assignment_type, :course, to: :assignment
 
-  after_destroy :cache_student_and_team_scores
+  after_destroy :update_student_and_team_scores
 
   scope :order_by_highest_score, -> { order("score DESC") }
   scope :order_by_student, -> { joins(:student).order("users.last_name, users.first_name ASC") }
@@ -119,8 +119,8 @@ class Grade < ActiveRecord::Base
     assignment_type.weight_for_student(student)
   end
 
-  def cache_student_and_team_scores
-    student.cache_course_score_and_level(course_id)
+  def update_student_and_team_scores
+    student.update_course_score_and_level(course_id)
     team = student.team_for_course(course_id)
     return unless team.present?
     team.update_average_score!
