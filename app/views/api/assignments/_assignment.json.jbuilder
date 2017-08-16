@@ -29,6 +29,7 @@ json.attributes do
   json.threshold_points             assignment.threshold_points
   json.updated_at                   assignment.updated_at
   json.visible_when_locked          assignment.visible_when_locked
+  json.learning_objective_id        assignment.learning_objective_id
 
   # boolean attributes
   json.visible                    assignment.visible
