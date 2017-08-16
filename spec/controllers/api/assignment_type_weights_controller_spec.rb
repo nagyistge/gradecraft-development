@@ -33,7 +33,7 @@ describe API::AssignmentTypeWeightsController do
         expect(assignment_type.weight_for_student(student)).to eq(4)
       end
 
-      it "updates existing grades for the assignment type" do
+      it "updates existing grade scores for the assignment type" do
         assignment = create :assignment, assignment_type: assignment_type
         other_assignment = create :assignment
         grade = create :grade, assignment: assignment, student: student, raw_points: 1000
@@ -41,6 +41,13 @@ describe API::AssignmentTypeWeightsController do
         post :create, params: { assignment_type_id: assignment_type.id, weight: 4 }, format: :json
         expect(grade.reload.score).to eq(4000)
         expect(other_grade.reload.score).to eq(333)
+      end
+
+      it "updates existing course score" do
+        assignment = create :assignment, assignment_type: assignment_type
+        grade = create :grade, assignment: assignment, student: student, raw_points: 1000, student_visible: true
+        post :create, params: { assignment_type_id: assignment_type.id, weight: 4 }, format: :json
+        expect(student.score_for_course(course)).to eq(4000)
       end
     end
   end
