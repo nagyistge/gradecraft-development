@@ -30,9 +30,11 @@ json.attributes do
   json.updated_at                   assignment.updated_at
   json.visible_when_locked          assignment.visible_when_locked
 
-  json.learning_objective_link_attributes do
-    json.objective_id assignment.learning_objective_link.objective.try(:id)
-  end unless assignment.learning_objective_link.nil?
+  json.learning_objective_links_attributes do
+    json.array! assignment.learning_objective_links.pluck(:objective_id) do |id|
+      json.objective_id id
+    end
+  end if assignment.learning_objective_links.any?
 
   # boolean attributes
   json.visible                    assignment.visible
