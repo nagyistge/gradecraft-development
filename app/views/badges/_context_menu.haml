@@ -13,6 +13,7 @@
           %ul.options-menu.dropdown-content
             - if @badge.state == "Proposed"
               = active_course_link_to decorative_glyph(:plus) + "Accept", accept_proposal_badge_path(badge), method: :post
+              = active_course_link_to decorative_glyph(:minus) + "Deny", accept_proposal_badge_path(badge), method: :post
             - if actions.include? :see
               %li= link_to decorative_glyph(:eye) + "See", badge_path(badge), class: "button button-edit"
             - if actions.include? :award

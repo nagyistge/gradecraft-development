@@ -4,6 +4,7 @@
   = render partial: "layouts/alerts"
 
   .badge-show-page
+    = render partial: "badges/components/created_by", locals: { badge: presenter.badge }
     .badge-container
       .img-cropper.med-crop
         = render partial: "badges/components/icon", locals: { badge: presenter.badge, count: presenter.earned_badges.count }
