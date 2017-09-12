@@ -1,6 +1,9 @@
 = render partial: "badges/context_menu", locals: {actions: [:new]} if current_user_is_staff?
+-# = render partial: "badges/student_context_menu", locals: {actions: [:new]} if current_user_is_staff?
+= render partial: "badges/student_context_menu", locals: {actions: [:new]} if current_user_is_student? || current_user_is_observer?
 
 - if current_user_is_student? || current_user_is_observer?
+  = active_course_link_to decorative_glyph(:plus) + "Propose New #{(term_for :badge).titleize}", new_badge_path, class: "button button-edit"
   = render partial: "badges/index_student", locals: { presenter: presenter }
 
 - elsif current_user_is_staff?

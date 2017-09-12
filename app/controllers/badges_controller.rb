@@ -1,9 +1,9 @@
 class BadgesController < ApplicationController
 
   before_action :ensure_not_observer?, except: [:index, :show]
-  before_action :ensure_staff?, except: [:index, :show]
+  before_action :ensure_staff?, except: [:index, :show, :propose, :new]
   before_action :find_badge, only: [:show, :edit, :destroy]
-  before_action :use_current_course, only: [:index, :show, :new, :edit]
+  before_action :use_current_course, only: [:index, :show, :new, :propose, :edit]
 
   # GET /badges
   def index
@@ -27,6 +27,14 @@ class BadgesController < ApplicationController
 
   def new
     @badge = @course.badges.new
+  end
+
+  def propose
+    if current_user_is_staff?
+      @badge = @course.badges.new
+    else
+      @badge = @course.badges.new
+    end
   end
 
   def edit
