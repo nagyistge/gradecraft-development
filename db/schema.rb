@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170805193014) do
+ActiveRecord::Schema.define(version: 20170912142741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -150,21 +150,23 @@ ActiveRecord::Schema.define(version: 20170805193014) do
   end
 
   create_table "badges", force: :cascade do |t|
-    t.string   "name",                                         null: false
+    t.string   "name",                                              null: false
     t.text     "description"
     t.integer  "full_points",                  default: 0
-    t.integer  "course_id",                                    null: false
+    t.integer  "course_id",                                         null: false
     t.string   "icon"
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
-    t.boolean  "visible",                      default: true,  null: false
-    t.boolean  "can_earn_multiple_times",      default: true,  null: false
-    t.integer  "position",                                     null: false
-    t.boolean  "visible_when_locked",          default: true,  null: false
-    t.boolean  "show_name_when_locked",        default: true,  null: false
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
+    t.boolean  "visible",                      default: true,       null: false
+    t.boolean  "can_earn_multiple_times",      default: true,       null: false
+    t.integer  "position",                                          null: false
+    t.boolean  "visible_when_locked",          default: true,       null: false
+    t.boolean  "show_name_when_locked",        default: true,       null: false
     t.boolean  "show_points_when_locked",      default: true
-    t.boolean  "show_description_when_locked", default: true,  null: false
-    t.boolean  "student_awardable",            default: false, null: false
+    t.boolean  "show_description_when_locked", default: true,       null: false
+    t.boolean  "student_awardable",            default: false,      null: false
+    t.string   "state",                        default: "Proposed", null: false
+    t.integer  "user_id",                                           null: false
   end
 
   create_table "challenge_files", force: :cascade do |t|

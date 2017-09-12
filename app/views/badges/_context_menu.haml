@@ -3,12 +3,16 @@
     %ul
       - if actions.include? :edit
         = active_course_link_to decorative_glyph(:edit) + "Edit", edit_badge_path(badge), class: "button button-edit"
+
       - if actions.include? :new
         = active_course_link_to decorative_glyph(:plus) + "New #{(term_for :badge).titleize}", new_badge_path, class: "button button-edit"
+
       - if !current_page?(badges_path)
         %li.dropdown
           %button.button-edit.button-options{role: "button", type: "button"}= decorative_glyph(:cog) + "Options" + decorative_glyph("caret-down")
           %ul.options-menu.dropdown-content
+            - if @badge.state == "Proposed"
+              = active_course_link_to decorative_glyph(:plus) + "Accept", accept_proposal_badge_path(badge), method: :post
             - if actions.include? :see
               %li= link_to decorative_glyph(:eye) + "See", badge_path(badge), class: "button button-edit"
             - if actions.include? :award

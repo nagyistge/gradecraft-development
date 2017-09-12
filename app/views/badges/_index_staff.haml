@@ -10,6 +10,7 @@
         %th.points-column Point Value
         %th.lock-icon-column Locked?
         %th.earned_column Earned
+        %th.state_column State
         %th.button-column.options Options
 
     %tbody.sort-badges
@@ -38,6 +39,8 @@
 
             // Badge Count
             %td= render partial: "badges/components/count", locals: { badge: badge, count: presenter.earned_badges_count(badge) }
+
+            %td= render partial: "badges/components/state", locals: { badge: badge }
 
             // Buttons
             %td= render partial: "badges/buttons", locals: { badge: badge }

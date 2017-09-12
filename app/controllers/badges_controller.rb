@@ -29,14 +29,6 @@ class BadgesController < ApplicationController
     @badge = @course.badges.new
   end
 
-  def propose
-    if current_user_is_staff?
-      @badge = @course.badges.new
-    else
-      @badge = @course.badges.new
-    end
-  end
-
   def edit
     @badge = Badge.find(params[:id])
   end
@@ -46,6 +38,15 @@ class BadgesController < ApplicationController
     @badge.destroy
     redirect_to badges_path,
       notice: "#{@name} #{term_for :badge} successfully deleted"
+  end
+
+  def accept_proposal
+    @badge = Badge.find(params[:id])
+    if @badge.update_attribute(:state, "Accepted")
+      redirect_to badges_path, notice: "#{@badge.name} Accepted"
+    else
+      redirect_to badges_path, notice: "#{@badge.name} Something Went Wrong"
+    end
   end
 
   def export_structure

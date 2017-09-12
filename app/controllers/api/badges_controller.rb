@@ -1,7 +1,8 @@
 class API::BadgesController < ApplicationController
   include SortsPosition
 
-  before_action :ensure_staff?, except: [:index]
+  before_action :ensure_not_observer?, only: [:create]
+  before_action :ensure_staff?, except: [:index, :create]
 
   # GET api/badges
   def index
@@ -48,7 +49,7 @@ class API::BadgesController < ApplicationController
   end
 
   def create
-    @badge = current_course.badges.new(badge_params)
+    @badge = current_course.badges.new(badge_params.merge(user_id: current_user.id)) # I think it's a bad idea to merge here, revisit later
     if @badge.save
       render "api/badges/show", success: true, status: 201
     else
@@ -80,7 +81,8 @@ class API::BadgesController < ApplicationController
       :show_points_when_locked,
       :student_awardable,
       :visible,
-      :visible_when_locked
+      :visible_when_locked,
+      :user_id
     )
   end
 end

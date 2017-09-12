@@ -20,6 +20,7 @@
     visible: false,
     can_earn_multiple_times: false,
     student_awardable: false,
+    user_id: 3
   },
   assign_samples: false, # assign earned badges on init
   unlock_condition: false,
