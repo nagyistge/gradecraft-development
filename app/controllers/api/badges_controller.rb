@@ -51,7 +51,6 @@ class API::BadgesController < ApplicationController
   def create
     @badge = current_course.badges.new(badge_params.merge(user_id: current_user.id)) # I think it's a bad idea to merge here, revisit later
     if current_user_is_staff?
-      binding.pry
       @badge.update_attribute(:state, "Accepted")
     end
     if @badge.save
