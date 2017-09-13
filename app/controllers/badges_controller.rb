@@ -10,6 +10,9 @@ class BadgesController < ApplicationController
     render Badges::IndexPresenter.build({
       title: term_for(:badges),
       badges: @course.badges.ordered,
+      accepted_badges: @course.badges.accepted,
+      rejected_badges: @course.badges.rejected,
+      proposed_badges: @course.badges.proposed,
       student: current_student
     })
   end
@@ -44,6 +47,15 @@ class BadgesController < ApplicationController
     @badge = Badge.find(params[:id])
     if @badge.update_attribute(:state, "Accepted")
       redirect_to badges_path, notice: "#{@badge.name} Accepted"
+    else
+      redirect_to badges_path, notice: "#{@badge.name} Something Went Wrong"
+    end
+  end
+
+  def reject_proposal
+    @badge = Badge.find(params[:id])
+    if @badge.update_attribute(:state, "Rejected")
+      redirect_to badges_path, notice: "#{@badge.name} Rejected"
     else
       redirect_to badges_path, notice: "#{@badge.name} Something Went Wrong"
     end

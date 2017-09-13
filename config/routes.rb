@@ -154,6 +154,7 @@ Rails.application.routes.draw do
   resources :badges, except: [:update, :create] do
     get "export_structure", on: :collection
     post "accept_proposal", on: :member
+    post "reject_proposal", on: :member
     resources :earned_badges do
       get :mass_edit, on: :collection
       post :mass_earn, on: :collection

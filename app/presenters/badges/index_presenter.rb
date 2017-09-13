@@ -7,6 +7,18 @@ class Badges::IndexPresenter < Showtime::Presenter
     properties[:badges]
   end
 
+  def accepted_badges
+    properties[:accepted_badges]
+  end
+
+  def rejected_badges
+    properties[:rejected_badges]
+  end
+
+  def proposed_badges
+    properties[:proposed_badges]
+  end
+
   def student
     properties[:student]
   end

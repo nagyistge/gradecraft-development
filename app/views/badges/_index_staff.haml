@@ -1,46 +1,20 @@
 .pageContent
   = render "layouts/alerts"
 
-  %table.badge-index-table.second-row-header
-    %thead
-      %tr
-        %th.sort-column
-        %th.badge-name-column Name
-        %th.icon-column Icon
-        %th.points-column Point Value
-        %th.lock-icon-column Locked?
-        %th.earned_column Earned
-        %th.state_column State
-        %th.button-column.options Options
+  = simple_form_for(@course)  do |f|
+    #tabs.ui-tabs.ui-widget
+      %ul.ui-tabs-nav{role: "tablist"}
+        %li
+          %a{ "href" => "#tab"} Accepted Badges
+        %li
+          %a{ "href" => "#tab2"} Proposed Badges
+        %li
+          %a{ "href" => "#tab3"} Rejected Badges
 
-    %tbody.sort-badges
-      - presenter.badges.each do |badge|
-        - if BadgeProctor.new(badge).viewable?(current_student || current_user)
-          %tr{id: "badge-#{badge.id}"}
-            %td.center.draggable
-              %i.fa.fa-arrows-v
-
-            // Badge Name
-            %td= render partial: "badges/components/name",
-                locals: { badge: badge, title: link_to(badge.name, badge_path(badge)) }
-
-            // Badge Icon
-            %td
-              .img-cropper.med-crop
-                = render partial: "badges/components/icon", locals: { badge: badge, count: 1 }
-
-            // Point Value
-            %td
-              - if current_course.valuable_badges?
-                = render partial: "badges/components/points", locals: { badge: badge }
-
-            // Lock Condition Icons
-            %td= render partial: "badges/components/hover_icons", locals: { badge: badge }
-
-            // Badge Count
-            %td= render partial: "badges/components/count", locals: { badge: badge, count: presenter.earned_badges_count(badge) }
-
-            %td= render partial: "badges/components/state", locals: { badge: badge }
-
-            // Buttons
-            %td= render partial: "badges/buttons", locals: { badge: badge }
+      #tabt1.ui-tabs-panel
+        .ui-tabs-panel#tab.active{role: "tabpanel", "aria-hidden" => false }
+          = render partial: "badges/components/badge_table", locals: { title: "accepted", badges: presenter.accepted_badges, presenter: presenter, f: f }
+        .ui-tabs-panel#tab2{role: "tabpanel", "aria-hidden" => false }
+          = render partial: "badges/components/badge_table", locals: { title: "proposed", badges: presenter.proposed_badges, presenter: presenter, f: f }
+        .ui-tabs-panel#tab3{role: "tabpanel", "aria-hidden" => false }
+          = render partial: "badges/components/badge_table", locals: { title: "rejected", badges: presenter.rejected_badges, presenter: presenter, f: f }
