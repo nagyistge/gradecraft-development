@@ -11,7 +11,7 @@
         %li.dropdown
           %button.button-edit.button-options{role: "button", type: "button"}= decorative_glyph(:cog) + "Options" + decorative_glyph("caret-down")
           %ul.options-menu.dropdown-content
-            - if @badge.state == "Proposed"
+            - if @badge.state == "proposed"
               = active_course_link_to decorative_glyph(:plus) + "Accept", accept_proposal_badge_path(badge), method: :post
               = active_course_link_to decorative_glyph(:minus) + "Reject", reject_proposal_badge_path(badge), method: :post
             - if actions.include? :see

@@ -1,2 +1,2 @@
-- if badge.state == "Proposed"
-  = "Proposed By: #{User.find(badge.user_id).name}"
+- if badge.state == "proposed"
+  = "Proposed By: #{User.find(badge.created_by).name}"

@@ -27,9 +27,9 @@ class Badge < ActiveRecord::Base
 
   scope :visible, -> { where(visible: true) }
   scope :ordered, -> { order("position ASC") }
-  scope :accepted, -> { where(state: "Accepted").order("position ASC") }
-  scope :rejected, -> { where(state: "Rejected").order("position ASC") }
-  scope :proposed, -> { where(state: "Proposed").order("position ASC") }
+  scope :accepted, -> { where(state: "accepted").order("position ASC") }
+  scope :rejected, -> { where(state: "rejected").order("position ASC") }
+  scope :proposed, -> { where(state: "proposed").order("position ASC") }
   scope :earned_this_week, -> { includes(:earned_badges).where("earned_badges.updated_at > ?", 7.days.ago).references(:earned_badges) }
 
   # Counting how many times a particular student has earned this badge

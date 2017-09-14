@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170912142741) do
+ActiveRecord::Schema.define(version: 20170914130647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -165,8 +165,9 @@ ActiveRecord::Schema.define(version: 20170912142741) do
     t.boolean  "show_points_when_locked",      default: true
     t.boolean  "show_description_when_locked", default: true,       null: false
     t.boolean  "student_awardable",            default: false,      null: false
-    t.string   "state",                        default: "Proposed", null: false
-    t.integer  "user_id",                                           null: false
+    t.string   "state",                        default: "proposed", null: false
+    t.integer  "created_by",                   default: 0
+    t.index ["created_by"], name: "index_badges_on_created_by", using: :btree
   end
 
   create_table "challenge_files", force: :cascade do |t|

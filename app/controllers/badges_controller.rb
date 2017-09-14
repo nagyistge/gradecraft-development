@@ -45,7 +45,7 @@ class BadgesController < ApplicationController
 
   def accept_proposal
     @badge = Badge.find(params[:id])
-    if @badge.update_attribute(:state, "Accepted")
+    if @badge.update_attribute(:state, "accepted")
       redirect_to badges_path, notice: "#{@badge.name} Accepted"
     else
       redirect_to badges_path, notice: "#{@badge.name} Something Went Wrong"
@@ -54,7 +54,7 @@ class BadgesController < ApplicationController
 
   def reject_proposal
     @badge = Badge.find(params[:id])
-    if @badge.update_attribute(:state, "Rejected")
+    if @badge.update_attribute(:state, "rejected")
       redirect_to badges_path, notice: "#{@badge.name} Rejected"
     else
       redirect_to badges_path, notice: "#{@badge.name} Something Went Wrong"
