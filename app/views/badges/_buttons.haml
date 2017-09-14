@@ -1,7 +1,8 @@
 .button-container.dropdown
   %button.button-edit.button-options{role: "button", type: "button", "aria-label": "Additional Options"}= decorative_glyph(:cog) + decorative_glyph("caret-down")
   %ul.options-menu.dropdown-content
-    = active_course_link_to decorative_glyph(:check) + "Quick Award", mass_edit_badge_earned_badges_path(badge)
-    = active_course_link_to decorative_glyph(:star) + "Award", new_badge_earned_badge_path(badge)
+    - if badge.state == "accepted"
+      = active_course_link_to decorative_glyph(:check) + "Quick Award", mass_edit_badge_earned_badges_path(badge)
+      = active_course_link_to decorative_glyph(:star) + "Award", new_badge_earned_badge_path(badge)
     = active_course_link_to decorative_glyph(:edit) + "Edit", edit_badge_path(badge)
     = active_course_link_to decorative_glyph(:trash) + "Delete", badge_path(badge), data: { confirm: "Are you sure you want to delete #{badge.name}?",  method: :delete }

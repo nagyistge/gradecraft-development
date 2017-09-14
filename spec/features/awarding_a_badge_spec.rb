@@ -1,7 +1,7 @@
-feature "awarding a badge" do
+feature "awarding a badge", focus: true do
   context "as a professor" do
     let(:professor) { create :user, courses: [course], role: :professor }
-    let!(:badge) { create :badge, name: "Fancy Badge", course: course}
+    let!(:badge) { create :badge, name: "Fancy Badge", course: course, state: "accepted"}
     let!(:student) { build :user, first_name: "Hermione", last_name: "Granger", courses: [course], role: :student }
 
     before(:each) do

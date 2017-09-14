@@ -16,7 +16,8 @@
               = active_course_link_to decorative_glyph(:minus) + "Reject", reject_proposal_badge_path(badge), method: :post
             - if actions.include? :see
               %li= link_to decorative_glyph(:eye) + "See", badge_path(badge), class: "button button-edit"
-            - if actions.include? :award
-              = active_course_link_to decorative_glyph(:star) + "Award", new_badge_earned_badge_path(badge_id: badge)
-            - if actions.include? :quick_award
-              = active_course_link_to decorative_glyph(:check) + "Quick Award", mass_edit_badge_earned_badges_path(badge)
+            - if @badge.state == "accepted"
+              - if actions.include? :award
+                = active_course_link_to decorative_glyph(:star) + "Award", new_badge_earned_badge_path(badge_id: badge)
+              - if actions.include? :quick_award
+                = active_course_link_to decorative_glyph(:check) + "Quick Award", mass_edit_badge_earned_badges_path(badge)
