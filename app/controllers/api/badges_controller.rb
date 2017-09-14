@@ -49,9 +49,9 @@ class API::BadgesController < ApplicationController
   end
 
   def create
-    @badge = current_course.badges.new(badge_params.merge(created_by: current_user.id)) # I think it's a bad idea to merge here, revisit later
+    @badge = current_course.badges.new(badge_params.merge(created_by: current_user.id))
     if current_user_is_staff?
-      @badge.update_attribute(:state, "accepted")
+      @badge.state = "accepted"
     end
     if @badge.save
       render "api/badges/show", success: true, status: 201
@@ -85,7 +85,7 @@ class API::BadgesController < ApplicationController
       :student_awardable,
       :visible,
       :visible_when_locked,
-      :user_id
+      :created_by
     )
   end
 end
