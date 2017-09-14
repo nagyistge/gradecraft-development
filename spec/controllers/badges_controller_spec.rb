@@ -57,16 +57,6 @@ describe BadgesController do
   context "as student" do
     before(:each) { login_user(student) }
 
-    describe "protected routes" do
-      [
-        :new
-      ].each do |route|
-          it "#{route} redirects to root" do
-            expect(get route).to redirect_to(:root)
-          end
-        end
-    end
-
     describe "protected routes requiring id in params" do
       [
         :edit,
