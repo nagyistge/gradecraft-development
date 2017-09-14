@@ -1,4 +1,4 @@
-feature "awarding a badge", focus: true do
+feature "awarding a badge" do
   context "as a professor" do
     let(:professor) { create :user, courses: [course], role: :professor }
     let!(:badge) { create :badge, name: "Fancy Badge", course: course, state: "accepted"}
