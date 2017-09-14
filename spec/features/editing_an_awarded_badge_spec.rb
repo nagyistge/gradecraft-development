@@ -1,7 +1,7 @@
 feature "editing an awarded a badge" do
   context "as a professor" do
     let(:professor) { create :user, courses: [course], role: :professor }
-    let!(:badge) { create :badge, name: "Fancy Badge", course: course}
+    let!(:badge) { create :badge, name: "Fancy Badge", course: course, state: "accepted"}
     let(:student) { build :user, first_name: "Hermione", last_name: "Granger", courses: [course], role: :student }
     let(:student_2) { build :user, first_name: "Ron", last_name: "Weasley", courses: [course], role: :student }
     let!(:earned_badge) { create :earned_badge, badge: badge, student: student}
