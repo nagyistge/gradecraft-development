@@ -10,7 +10,7 @@
     .form-item
       = f.label :email
       = f.text_field :email, "aria-required": "true"
-    - if ! @user.kerberos_uid.present? && @user.persisted? && current_user_is_admin?
+    - if ! @user.kerberos_uid.present? && current_user_is_admin?
       .form-item
         = f.label :password
         = f.password_field :password, as: :password

@@ -111,8 +111,10 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
 
   validates :first_name, :last_name, presence: true
-  validates :password, confirmation: true
-  validates :password_confirmation, presence: true, if: :password, on: :update
+
+  validates_length_of :password, minimum: 3, message: 'password must be at least 3 characters long', if: :password
+  validates_confirmation_of :password, if: :password, on: :create
+
   validates :email, internal_email: { format: internal_email_regex, name: "University of Michigan" }
 
   def internal?

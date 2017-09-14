@@ -1,4 +1,4 @@
-= form.simple_fields_for :course_memberships, @course_membership do |cm|
+= simple_fields_for :course_memberships, @course_membership do |cm|
   %h2.form-title= "#{current_course.name} Profile"
   .form-item.course-selection
     = cm.hidden_field :course_id, value: current_course.id
@@ -11,8 +11,7 @@
         = cm.text_field :pseudonym
     - if current_course.has_team_roles?
       .form-item
-        = cm.label :team_role, "Team Role"
-        = cm.text_field :team_role
+        = cm.input :team_role
     - if current_course.has_character_profiles?
       .form-item
         = cm.input :character_profile
