@@ -46,6 +46,22 @@ describe BadgesController do
       end
     end
 
+    describe "POST accept_proposal" do
+      it "accepts the proposed badge" do
+        another_badge = create :badge, course: course
+        post :accept_proposal, params: { id: another_badge }
+        expect(another_badge.reload.state).to eq "accepted"
+      end
+    end
+
+    describe "POST reject_proposal" do
+      it "reject the proposed badge" do
+        another_badge = create :badge, course: course
+        post :reject_proposal, params: { id: another_badge }
+        expect(another_badge.reload.state).to eq "rejected"
+      end
+    end
+
     describe "GET export_structure" do
       it "retrieves the export_structure download" do
         get :export_structure, params: { id: course.id }, format: :csv
