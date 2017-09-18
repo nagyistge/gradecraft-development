@@ -10,7 +10,9 @@
     .form-item
       = f.label :email
       = f.text_field :email, "aria-required": "true"
-    - if ! @user.kerberos_uid.present? && current_user_is_admin?
+    - if !@user.persisted?
+      %i New users will be sent an activation email asking them to set a password. If for some reason they can't access that email, contact help@gradecraft.com for support.
+    - if current_user_is_admin? && @user.persisted?
       .form-item
         = f.label :password
         = f.password_field :password, as: :password

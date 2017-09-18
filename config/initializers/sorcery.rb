@@ -32,9 +32,9 @@ Rails.application.config.sorcery.configure do |config|
                                                                       # For example {"My App" => "Application"}
 
   # -- activity logging --
-  # config.register_login_time = true                                 # will register the time of last user login, every login.
-  # config.register_logout_time = true                                # will register the time of last user logout, every logout.
-  # config.register_last_activity_time = true                         # will register the time of last user action, every action.
+  config.register_login_time = true                                 # will register the time of last user login, every login.
+  config.register_logout_time = true                                # will register the time of last user logout, every logout.
+  config.register_last_activity_time = true                         # will register the time of last user action, every action.
 
   # -- external --
   # config.external_providers = []                                    # What providers are supported by this app,
@@ -64,9 +64,6 @@ Rails.application.config.sorcery.configure do |config|
 
      user.username_attribute_names = [:username, :email]
     # -- core --
-    # user.username_attribute_names = [:username]                                     # specify username
-                                                                                      # attributes, for example:
-                                                                                      # [:username, :email].
 
     # user.password_attribute_name = :password                                        # change *virtual* password
                                                                                       # attribute, the one which is used
@@ -123,7 +120,6 @@ Rails.application.config.sorcery.configure do |config|
 
     user.activation_mailer_disabled = true
     user.user_activation_mailer = UserMailer
-    # user.user_activation_mailer = nil                                               # your mailer class. Required.
 
     # user.activation_needed_email_method_name = :activation_needed_email             # activation needed email method
                                                                                       # on your mailer class.
@@ -132,7 +128,7 @@ Rails.application.config.sorcery.configure do |config|
     # user.activation_success_email_method_name = :activation_success_email           # activation success email method
                                                                                       # on your mailer class.
 
-    # user.prevent_non_active_users_to_login = true                                   # do you want to prevent or allow
+    user.prevent_non_active_users_to_login = false                                   # do you want to prevent or allow
                                                                                       # users that did not activate by
                                                                                       # email to login?
 
@@ -155,7 +151,7 @@ Rails.application.config.sorcery.configure do |config|
                                                                                                 # class.
 
     user.reset_password_expiration_period = 28_800
-    # user.reset_password_expiration_period = nil                                               # how many seconds
+    # how many seconds
                                                                                                 # before the reset
                                                                                                 # request expires. nil
                                                                                                 # for never expires.
