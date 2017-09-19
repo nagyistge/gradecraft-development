@@ -551,6 +551,7 @@ ActiveRecord::Schema.define(version: 20171006182839) do
     t.integer  "flagged_value", null: false
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "order"
   end
 
   create_table "learning_objective_links", force: :cascade do |t|
