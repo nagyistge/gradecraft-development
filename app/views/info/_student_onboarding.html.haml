@@ -6,9 +6,9 @@
       = render partial: "info/student_onboarding/student_onboarding_slide3"
       = render partial: "info/student_onboarding/student_onboarding_slide4"
       = render partial: "info/student_onboarding/student_onboarding_slide5"
-      -# , locals: {presenter: presenter}
+      , locals: {presenter: presenter}
 
-      -# - if presenter.has_course_specific_features?
-      -#   = render partial: "info/student_onboarding/student_onboarding_slide6", locals: { presenter: presenter }
+      - if presenter.has_course_specific_features?
+        = render partial: "info/student_onboarding/student_onboarding_slide6", locals: { presenter: presenter }
 
     %button.btn-close#modal-close{type: 'submit', 'aria-label': 'close'}= glyph(:times)

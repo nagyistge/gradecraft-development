@@ -114,8 +114,8 @@ if (m && p) {
     // close modal by btn click/hit
     mClose.addEventListener('click', modalClose);
 
-    // close modal by modal action btn click/hit
-    mAction.addEventListener('click', modalClose);
+    // // close modal by modal action btn click/hit
+    // mAction.addEventListener('click', modalClose);
 
     // close modal by keydown, but only if modal is open
     document.addEventListener('keydown', modalClose);
