@@ -12,6 +12,7 @@ class Badge < ActiveRecord::Base
   has_many :predicted_earned_badges, dependent: :destroy
 
   belongs_to :course
+  belongs_to :creator, class_name: "User", foreign_key: :created_by
 
   accepts_nested_attributes_for :earned_badges, allow_destroy: true, reject_if: proc { |a| a.points.blank? }
 

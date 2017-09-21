@@ -8,15 +8,15 @@ class Badges::IndexPresenter < Showtime::Presenter
   end
 
   def accepted_badges
-    properties[:accepted_badges]
+    badges.accepted
   end
 
   def rejected_badges
-    properties[:rejected_badges]
+    badges.rejected
   end
 
   def proposed_badges
-    properties[:proposed_badges]
+    badges.proposed
   end
 
   def student

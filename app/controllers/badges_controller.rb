@@ -10,9 +10,9 @@ class BadgesController < ApplicationController
     render Badges::IndexPresenter.build({
       title: term_for(:badges),
       badges: @course.badges.ordered,
-      accepted_badges: @course.badges.accepted,
-      rejected_badges: @course.badges.rejected,
-      proposed_badges: @course.badges.proposed,
+      # accepted_badges: @course.badges.accepted,
+      # rejected_badges: @course.badges.rejected,
+      # proposed_badges: @course.badges.proposed,
       student: current_student
     })
   end
@@ -43,19 +43,11 @@ class BadgesController < ApplicationController
       notice: "#{@name} #{term_for :badge} successfully deleted"
   end
 
-  def accept_proposal
+  def update_proposal
     @badge = Badge.find(params[:id])
-    if @badge.update_attribute(:state, "accepted")
-      redirect_to badges_path, notice: "#{@badge.name} Accepted"
-    else
-      redirect_to badges_path, notice: "#{@badge.name} Something Went Wrong"
-    end
-  end
-
-  def reject_proposal
-    @badge = Badge.find(params[:id])
-    if @badge.update_attribute(:state, "rejected")
-      redirect_to badges_path, notice: "#{@badge.name} Rejected"
+    update_value = params[:update_value]
+    if @badge.update_attribute(:state, update_value)
+      redirect_to badges_path, notice: "#{@badge.name} #{update_value.capitalize}"
     else
       redirect_to badges_path, notice: "#{@badge.name} Something Went Wrong"
     end
