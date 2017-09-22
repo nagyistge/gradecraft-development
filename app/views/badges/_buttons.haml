@@ -4,5 +4,8 @@
     - if badge.state == "accepted"
       = active_course_link_to decorative_glyph(:check) + "Quick Award", mass_edit_badge_earned_badges_path(badge)
       = active_course_link_to decorative_glyph(:star) + "Award", new_badge_earned_badge_path(badge)
+    - if badge.state == "proposed"
+      = active_course_link_to decorative_glyph(:plus) + "Accept", update_proposal_badge_path(badge, update_value: "accepted"), method: :post
+      = active_course_link_to decorative_glyph(:minus) + "Reject", update_proposal_badge_path(badge, update_value: "rejected"), method: :post
     = active_course_link_to decorative_glyph(:edit) + "Edit", edit_badge_path(badge)
     = active_course_link_to decorative_glyph(:trash) + "Delete", badge_path(badge), data: { confirm: "Are you sure you want to delete #{badge.name}?",  method: :delete }

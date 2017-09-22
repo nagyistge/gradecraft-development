@@ -22,11 +22,12 @@
               - if current_user_is_staff?
                 = link_to "(Remove)", remove_uploads_path({ :model => "BadgeFile", :upload_id => bf.id } )
 
-    - if current_course.has_teams?
+    - if current_course.has_teams? && presenter.badge.state == "accepted"
       .team-filter
         = form_tag badge_path(presenter.badge), name: "see_team", :onchange => ("javascript: document.see_team.submit();"), :method => :get do
           %label.sr-only{:for => "team_id"}
             Select #{term_for :team}
           = select_tag :team_id, options_for_select(presenter.teams.map { |t| [t.name, t.id] }, presenter.team.try(:id)), :prompt => "– Select #{(term_for :team).titleize} –"
 
+  - if presenter.badge.state == "accepted"
     = render partial: "badges/all_students_earned_badges_table", locals: { presenter: presenter }

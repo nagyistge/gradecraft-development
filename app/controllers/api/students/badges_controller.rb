@@ -18,6 +18,18 @@ class API::Students::BadgesController < ApplicationController
       :visible,
       :visible_when_locked).includes(:earned_badges)
     @earned_badges = current_course.earned_badges.where(student_id: @student.id)
+
+    return unless params[:state].present?
+      @badges = badges_by_state
+
     render template: "api/badges/index"
+  end
+
+  private
+
+  def badges_by_state
+    if params[:state] == "accepted"
+      return @badges.accepted
+    end
   end
 end

@@ -16,7 +16,11 @@ class API::BadgesController < ApplicationController
       :name,
       :position,
       :visible,
-      :visible_when_locked)
+      :visible_when_locked,
+      :state)
+
+    return unless params[:state].present?
+      @badges = badges_by_state
 
     if current_user_is_student?
       @student = current_student
@@ -69,6 +73,12 @@ class API::BadgesController < ApplicationController
   end
 
   private
+
+  def badges_by_state
+    if params[:state] == "accepted"
+      @badges = @badges.accepted
+    end
+  end
 
   def badge_params
     params.require(:badge).permit(

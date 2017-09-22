@@ -2,7 +2,7 @@
   AwardedBadgesCtrl = [()->
     vm = this
     vm.BadgeService = BadgeService
-    BadgeService.getBadges(vm.studentId)
+    BadgeService.getBadges(vm.studentId, "accepted")
 
     # Has the student currently earned this badge on this grade?
     vm.badgeIsEarnedForGrade = (badge)->
@@ -42,4 +42,3 @@
     templateUrl: 'grades/earned_badges_select.html'
   }
 ]
-
