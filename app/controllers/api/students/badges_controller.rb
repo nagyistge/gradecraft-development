@@ -19,8 +19,7 @@ class API::Students::BadgesController < ApplicationController
       :visible_when_locked).includes(:earned_badges)
     @earned_badges = current_course.earned_badges.where(student_id: @student.id)
 
-    return unless params[:state].present?
-      @badges = badges_by_state
+    @badges = badges_by_state if params[:state].present?
 
     render template: "api/badges/index"
   end
@@ -28,8 +27,14 @@ class API::Students::BadgesController < ApplicationController
   private
 
   def badges_by_state
-    if params[:state] == "accepted"
-      return @badges.accepted
+    state = params[:state]
+    case state
+    when "accepted"
+      @badges = @badges.accepted
+    when "proposed"
+      @badges = @badges.proposed
+    when "rejected"
+      @badges = @badges.rejected
     end
   end
 end

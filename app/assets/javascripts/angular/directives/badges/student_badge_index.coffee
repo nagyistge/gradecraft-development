@@ -21,7 +21,7 @@
   ]
 
   services = ()->
-    promises = [BadgeService.getBadges()]
+    promises = [BadgeService.getBadges(null, "accepted")]
     return $q.all(promises)
 
   {
@@ -35,4 +35,3 @@
     templateUrl: 'badges/student_index.html'
   }
 ]
-
