@@ -5,6 +5,8 @@ describe API::BadgesController do
   let(:student) { build(:user, courses: [course], role: :student) }
   let(:professor) { build(:user, courses: [course], role: :professor) }
   let(:badge) { create(:badge, course: course) }
+  let(:badge_accepted) { create(:badge, course: course, state: "accepted") }
+  let(:badge_rejected) { create(:badge, course: course, state: "rejected") }
 
   context "as professor" do
     before do
@@ -13,16 +15,30 @@ describe API::BadgesController do
       allow(controller).to receive(:current_user).and_return(professor)
     end
 
-
     describe "GET index" do
       it "assigns badges, no student, and no call to update" do
         badge
         get :index, format: :json
         predictor_badge_attributes.each do |attr|
+          # binding.pry
           expect(assigns(:badges)[0][attr]).to eq(badge[attr])
         end
         expect(assigns(:student)).to be_nil
         expect(assigns(:allow_updates)).to be_falsey
+      end
+
+      it "grabs accepted, proposed, rejected badges" do
+        badge
+        badge_accepted
+        badge_rejected
+        get :index, params: { state: "accepted", format: :json }
+        expect(assigns(:badges)).to eq([badge_accepted])
+
+        get :index, params: { state: "rejected", format: :json }
+        expect(assigns(:badges)).to eq([badge_rejected])
+
+        get :index, params: { state: "proposed", format: :json }
+        expect(assigns(:badges)).to eq([badge])
       end
     end
 
