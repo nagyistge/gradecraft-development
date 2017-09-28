@@ -1,6 +1,8 @@
 describe API::Students::BadgesController do
   let(:course) { build :course }
-  let(:badge) { create :badge }
+  let(:badge) { create :badge, course: course }
+  let(:badge_accepted) { create(:badge, course: course, state: "accepted") }
+  let(:badge_rejected) { create(:badge, course: course, state: "rejected") }
   let(:student) { create(:course_membership, :student, course: course).user}
   let(:professor) { create(:course_membership, :professor, course: course).user }
 
@@ -29,6 +31,29 @@ describe API::Students::BadgesController do
           student: student, course: course, student_visible: true)
         get :index, format: :json, params: { student_id: student.id }
         expect(assigns(:earned_badges)).to eq([earned_badge])
+      end
+
+      it "grabs accepted, proposed, rejected badges" do
+        earned_badge = create(
+          :earned_badge, badge: badge,
+          student: student, course: course, student_visible: true)
+
+        earned_badge_accepted = create(
+        :earned_badge, badge: badge_accepted,
+        student: student, course: course, student_visible: true)
+
+        earned_badge_rejected = create(
+          :earned_badge, badge: badge_rejected,
+          student: student, course: course, student_visible: true)
+
+        get :index, params: { student_id: student.id, state: "accepted" }, format: :json
+        expect(assigns(:badges)).to eq([badge_accepted])
+
+        get :index, params: { student_id: student.id, state: "rejected" }, format: :json
+        expect(assigns(:badges)).to eq([badge_rejected])
+
+        get :index, params: { student_id: student.id, state: "proposed" }, format: :json
+        expect(assigns(:badges)).to eq([badge])
       end
     end
   end
