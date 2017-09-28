@@ -46,18 +46,16 @@ describe BadgesController do
       end
     end
 
-    describe "POST accept_proposal" do
-      it "accepts the proposed badge" do
+    describe "POST update_proposal" do
+      it "updates the proposed badge to accepted" do
         another_badge = create :badge, course: course
-        post :accept_proposal, params: { id: another_badge }
+        post :update_proposal, params: { id: another_badge, update_value: "accepted" }
         expect(another_badge.reload.state).to eq "accepted"
       end
-    end
 
-    describe "POST reject_proposal" do
-      it "reject the proposed badge" do
+      it "updates the proposed badge to rejected" do
         another_badge = create :badge, course: course
-        post :reject_proposal, params: { id: another_badge }
+        post :update_proposal, params: { id: another_badge, update_value: "rejected" }
         expect(another_badge.reload.state).to eq "rejected"
       end
     end

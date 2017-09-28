@@ -10,9 +10,6 @@ class BadgesController < ApplicationController
     render Badges::IndexPresenter.build({
       title: term_for(:badges),
       badges: @course.badges.ordered,
-      # accepted_badges: @course.badges.accepted,
-      # rejected_badges: @course.badges.rejected,
-      # proposed_badges: @course.badges.proposed,
       student: current_student
     })
   end
