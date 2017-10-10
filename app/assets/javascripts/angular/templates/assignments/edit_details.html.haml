@@ -27,9 +27,6 @@
             .display-on-hover.hover-style
               Do {{ termFor("students")}} self-report their grade for this {{ termFor("assignment")}}?  If you add grade levels, they'll be able to select their self-assessed score from the list during the open time period. If you don't, they'll be able to select that they did the work and earn full points.
 
-  .form-subsection(ng-if="!assignment.pass_fail")
-    %assignment-score-levels(assignment="assignment")
-
   .form-subsection
     %h3.form-subtitle Submissions
     .form-item
@@ -60,8 +57,6 @@
             %i.fa.fa-info-circle
             .display-on-hover.hover-style
               Can {{ termFor("students")}} resubmit this {{ termFor("assignment")}}?
-
-
 
   .form-subsection
     %h3.form-subtitle Basic Visibility Settings

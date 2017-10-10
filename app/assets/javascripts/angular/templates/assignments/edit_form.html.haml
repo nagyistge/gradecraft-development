@@ -4,18 +4,23 @@
     %li(ng-click="focusTab('basics')" ng-class="{'active': isFocusTab('basics')}")
       %a Description & Purpose
     %li(ng-click="focusTab('details')" ng-class="{'active': isFocusTab('details')}")
-      %a Workflow & Grading
+      %a Details
     %li(ng-click="focusTab('unlocks')" ng-class="{'active': isFocusTab('unlocks')}")
       %a Unlock Conditions
+    %li(ng-click="focusTab('grading')" ng-class="{'active': isFocusTab('grading')}")
+      %a Grading
 
   #tab1(ng-show="isFocusTab('basics')")
-    %assignment-edit-basics(assignment="assignment")
+    %assignment-edit-basics(data-assignment="assignment")
 
   #tab2(ng-show="isFocusTab('details')")
-    %assignment-edit-details(assignment="assignment")
+    %assignment-edit-details(data-assignment="assignment")
 
   #tab3(ng-show="isFocusTab('unlocks')")
-    %assignment-edit-unlocks(assignment="assignment")
+    %assignment-edit-unlocks(data-assignment="assignment")
+
+  #tab4(ng-show="isFocusTab('grading')")
+    %assignment-edit-grading(data-assignment="assignment" data-rubric-id="rubricId")
 
   %button.button.right(ng-click="submitAssignment()") Update {{ termFor('assignment')}}
 

@@ -48,7 +48,8 @@ class AssignmentsController < ApplicationController
   end
 
   def edit
-    @assignment = current_course.assignments.find(params[:id])
+    @assignment = current_course.assignments.find params[:id]
+    @rubric = @assignment.find_or_create_rubric
   end
 
   # Duplicate an assignment - important for super repetitive items like

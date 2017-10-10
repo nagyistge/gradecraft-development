@@ -1,9 +1,9 @@
 # Main entry point for grading (standard/rubric individual/group)
 # Renders appropriate grading form for grade and assignment type
 
-@gradecraft.directive 'gradeEdit', ['$q', 'AssignmentService', 'GradeService',
-  ($q, AssignmentService, GradeService) ->
-    EditGradeCtrl = [()->
+@gradecraft.directive 'gradeEdit', ['$q', 'AssignmentService', 'GradeService', 'RubricService',
+  ($q, AssignmentService, GradeService, RubricService) ->
+    EditGradeCtrl = [() ->
       vm = this
 
       vm.loading = true
@@ -14,7 +14,7 @@
       vm.feedbackMessage =
         if vm.recipientType == "group" then "Enter Text Feedback" else "Upload Feedback or Enter Below"
 
-      services(vm.assignmentId, vm.recipientType, vm.recipientId).then(()->
+      services(@assignmentId, @recipientType, @recipientId, @rubricId).then(() ->
         vm.loading = false
 
         # Set a default state for new pass/fail grades, so that the
@@ -23,7 +23,7 @@
           GradeService.setGradeToPass()
       )
 
-      _rawPointsType = ()->
+      _rawPointsType = () ->
         assignment = AssignmentService.assignment()
         return "" if !assignment
 
@@ -37,37 +37,37 @@
           "DEFAULT"
 
       vm.isGroupGrade = vm.recipientType == "group"
-      vm.isStandardGraded = ()->
+      vm.isStandardGraded = () ->
         _rawPointsType() == "DEFAULT"
       vm.isRubricGraded = ()->
         _rawPointsType() == "RUBRIC"
-      vm.isPassFailGraded = ()->
+      vm.isPassFailGraded = () ->
         _rawPointsType() == "PASS_FAIL"
-      vm.isScoreLevelGraded = ()->
+      vm.isScoreLevelGraded = () ->
         _rawPointsType() == "SCORE_LEVELS"
-
     ]
 
-    services = (assignmentId, recipientType, recipientId)->
+    services = (assignmentId, recipientType, recipientId, rubricId) ->
       promises = [
         AssignmentService.getAssignment(assignmentId)
         GradeService.getGrade(assignmentId, recipientType, recipientId)
       ]
-      return $q.all(promises)
+      promises.push(RubricService.getRubric(rubricId)) if rubricId?
+      $q.all(promises)
 
     {
-      bindToController: true,
-      controller: EditGradeCtrl,
-      controllerAs: 'vm',
-      scope: {
-         assignmentId: "=",
-         recipientType: "@",
-         recipientId: "=",
-         submitPath: "@",
-         gradeNextPath: "@",
-         isActiveCourse: "=",
+      bindToController: true
+      controller: EditGradeCtrl
+      controllerAs: 'vm'
+      scope:
+         assignmentId: "="
+         rubricId: '='
+         recipientType: "@"
+         recipientId: "="
+         submitPath: "@"
+         gradeNextPath: "@"
+         isActiveCourse: "="
          hasAwardableBadges: "="
-        },
       templateUrl: 'grades/edit.html'
     }
 ]

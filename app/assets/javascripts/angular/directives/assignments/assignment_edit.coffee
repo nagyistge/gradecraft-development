@@ -25,6 +25,7 @@
     templateUrl: 'assignments/assignment_edit.html',
     scope: {
       assignmentId: "="
+      rubricId: '='
     }
   }
 ]

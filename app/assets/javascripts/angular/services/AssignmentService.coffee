@@ -64,8 +64,6 @@
       (response)->
         GradeCraftAPI.addItem(assignments, "assignments", response.data)
         GradeCraftAPI.formatDates(assignments[0],["open_at", "due_at", "accepts_submissions_until"])
-        if response.data.data.relationships && response.data.data.relationships.rubric
-          RubricService.getRubric(response.data.data.relationships.rubric.data.id)
         GradeCraftAPI.loadFromIncluded(fileUploads,"file_uploads", response.data)
         GradeCraftAPI.setTermFor("assignment", response.data.meta.term_for_assignment)
         GradeCraftAPI.setTermFor("pass", response.data.meta.term_for_pass)

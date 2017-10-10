@@ -4,6 +4,7 @@
   return {
     scope: {
       assignment: "="
+      rubricId: '='
     }
     templateUrl: 'assignments/edit_form.html',
     link: (scope, el, attr, ngModelCtrl)->
@@ -24,5 +25,3 @@
         return false
   }
 ]
-
-

@@ -13,9 +13,10 @@
         locals: { presenter: Submissions::ShowPresenter.new(id: @submission.id,
             assignment_id: @assignment.id, course: current_course, group_id: @group.id) }
 
-  %grade-edit{'assignment-id'=>"#{@assignment.id}",
-    'recipient-type'=>"group",
-    'recipient-id'=>"#{@group.id}",
-    'submit-path'=>"#{assignment_path(@assignment)}",
-    'grade-next-path'=>"#{@grade_next_path}",
-    'is-active-course'=>"#{current_course.active?}"}
+  %grade-edit{'data-assignment-id'=>"#{@assignment.id}",
+              'data-rubric-id'=>"#{@assignment.rubric.try(:id)}",
+              'data-recipient-type'=>"group",
+              'data-recipient-id'=>"#{@group.id}",
+              'data-submit-path'=>"#{assignment_path(@assignment)}",
+              'data-grade-next-path'=>"#{@grade_next_path}",
+              'data-is-active-course'=>"#{current_course.active?}"}

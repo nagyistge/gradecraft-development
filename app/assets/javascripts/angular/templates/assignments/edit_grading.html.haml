@@ -1,0 +1,7 @@
+%section.form-section
+  .form-subsection
+    %h3.form-subtitle Rubrics
+    %rubric-design.rubric-design(data-rubric-id="rubricId")
+
+  .form-subsection(ng-if="!assignment.pass_fail")
+    %assignment-score-levels(data-assignment="assignment")
