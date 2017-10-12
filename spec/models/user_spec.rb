@@ -1,4 +1,4 @@
-describe User , focus: true do
+describe User do
   let(:course) { build(:course) }
   let(:student) { create(:user, username: "simple", last_name: "Oneofakind") }
   let(:assignment) { create(:assignment, course: course) }

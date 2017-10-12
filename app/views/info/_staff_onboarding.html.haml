@@ -1,4 +1,4 @@
-.modal-overlay#modal-window{'aria-hidden': 'true', role: 'dialog', 'aria-label': 'Staff Onboarding', 'data-first-load': current_user.course_memberships.where(course: current_course).first.has_seen_course_onboarding? ? 'false' : 'true' }
+.modal-overlay#modal-window{'aria-hidden': 'true', role: 'dialog', 'aria-label': 'Staff Onboarding' }
   .modal-wrapper.modal-content#modal-holder{role: "document"}
     .modal-slider.onboarding-slides
       = render partial: "info/staff_onboarding/staff_onboarding_slide1"
