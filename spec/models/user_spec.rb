@@ -1,4 +1,4 @@
-describe User do
+describe User , focus: true do
   let(:course) { build(:course) }
   let(:student) { create(:user, username: "simple", last_name: "Oneofakind") }
   let(:assignment) { create(:assignment, course: course) }
@@ -6,9 +6,7 @@ describe User do
   let(:badge) { create(:badge, course: course, can_earn_multiple_times: true) }
   let(:single_badge) { create(:badge, course: course, can_earn_multiple_times: false) }
 
-  before do
-    create(:course_membership, user: student, course: course, role: "student", score: 100000, character_profile: "The six-fingered man.")
-  end
+  let!(:course_membership) { create(:course_membership, user: student, course: course, role: "student", score: 100000, character_profile: "The six-fingered man.") }
 
   describe "validations" do
     it "requires the password confirmation to match" do
@@ -90,6 +88,14 @@ describe User do
 
     it "should return false if the email does not exist" do
       expect(User.email_exists?("blah@somewhere-cool.biz")).to eq false
+    end
+  end
+
+  describe "#onboarded?" do
+    it "responds with the onboarding state for student and course" do
+      expect(student.onboarded?(course)).to eq(false)
+      CourseMembership.where(user: student, course: course).first.update(has_seen_course_onboarding: true)
+      expect(student.onboarded?(course)).to eq(true)
     end
   end
 

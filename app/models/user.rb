@@ -194,6 +194,10 @@ class User < ActiveRecord::Base
     return true if course_memberships.where(course: course).first.email_challenge_grade_notifications?
   end
 
+  def onboarded?(course)
+    return course_memberships.where(course: course).first.has_seen_course_onboarding?
+  end
+
   def submitter_directory_name
     "#{last_name.camelize}, #{first_name.camelize}"
   end
