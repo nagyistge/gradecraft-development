@@ -1,12 +1,11 @@
-.modal-overlay#modal-window{'aria-hidden': 'true', role: 'dialog', 'aria-label': 'Student Onboarding', 'data-first-load': "true" }
+.modal-overlay#modal-window{'aria-hidden': 'true', role: 'dialog', 'aria-label': 'Student Onboarding' }
   .modal-wrapper.modal-content#modal-holder{role: "document"}
     .modal-slider.onboarding-slides
       = render partial: "info/student_onboarding/student_onboarding_slide1"
       = render partial: "info/student_onboarding/student_onboarding_slide2"
       = render partial: "info/student_onboarding/student_onboarding_slide3"
       = render partial: "info/student_onboarding/student_onboarding_slide4"
-      = render partial: "info/student_onboarding/student_onboarding_slide5"
-      , locals: {presenter: presenter}
+      = render partial: "info/student_onboarding/student_onboarding_slide5", locals: {presenter: presenter}
 
       - if presenter.has_course_specific_features?
         = render partial: "info/student_onboarding/student_onboarding_slide6", locals: { presenter: presenter }

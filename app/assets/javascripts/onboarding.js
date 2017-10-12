@@ -48,7 +48,6 @@ if (m && p) {
         modal = getId('modal-holder'),
         allNodes = document.querySelectorAll("*"),
         modalOpen = false,
-        firstLoad = $('#modal-window').data('first-load'),
         lastFocus,
         i;
 
@@ -114,8 +113,10 @@ if (m && p) {
     // close modal by btn click/hit
     mClose.addEventListener('click', modalClose);
 
-    // // close modal by modal action btn click/hit
-    // mAction.addEventListener('click', modalClose);
+    // close modal by modal action btn click/hit
+    if (mAction) {
+      mAction.addEventListener('click', modalClose);
+    }
 
     // close modal by keydown, but only if modal is open
     document.addEventListener('keydown', modalClose);
@@ -125,8 +126,6 @@ if (m && p) {
       allNodes.item(i).addEventListener('focus', focusRestrict);
     }
 
-    if (firstLoad === true) {
-      $(document).ready(modalShow);
-    }
+    $(document).ready(modalShow);
   })();
 }
