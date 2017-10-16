@@ -1,28 +1,27 @@
 # Hovering synopsis of the rubric points assigned
 
-@gradecraft.directive 'rubricPointsOverview', ['RubricService', (RubricService) ->
+@gradecraft.directive 'rubricPointsOverview', ['RubricService', 'AssignmentService', (RubricService, AssignmentService) ->
 
-  return {
+  {
     templateUrl: 'rubrics/points_overview.html'
-    link: (scope, el, attr)->
+    link: (scope, el, attr) ->
 
-      scope.fullPoints = ()->
-        RubricService.fullPoints()
+      scope.fullPoints = () ->
+        AssignmentService.assignment().full_points || RubricService.fullPoints()
 
-      scope.pointsAssigned = ()->
+      scope.pointsAssigned = () ->
         RubricService.pointsAssigned()
 
-      scope.pointsRemaining = ()->
+      scope.pointsRemaining = () ->
         RubricService.fullPoints() - RubricService.pointsAssigned()
 
-      scope.pointsAreSatisfied = ()->
+      scope.pointsAreSatisfied = () ->
         RubricService.fullPoints() == RubricService.pointsAssigned()
 
-      scope.pointsAreMissing = ()->
+      scope.pointsAreMissing = () ->
         RubricService.fullPoints() > RubricService.pointsAssigned()
 
-      scope.pointsAreOver = ()->
+      scope.pointsAreOver = () ->
         RubricService.fullPoints() < RubricService.pointsAssigned()
   }
 ]
-
