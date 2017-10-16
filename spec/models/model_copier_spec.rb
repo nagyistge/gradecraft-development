@@ -83,4 +83,16 @@ describe ModelCopier do
       end
     end
   end
+
+  describe "lookups" do
+    subject { described_class.new(model).copy associations: :badges }
+
+    before(:each) { create :badge, course: model }
+
+    it "sets a lookup when a model is copied" do
+      subject
+      expect(ModelCopierLookups.instance.lookup(:course, model.id)).to eq subject.id
+      expect(ModelCopierLookups.instance.lookup(:badge, model.badges.first.id)).to eq subject.badges.first.id
+    end
+  end
 end

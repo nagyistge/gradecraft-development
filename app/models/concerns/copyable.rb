@@ -4,6 +4,8 @@ module Copyable
   def copy(attributes={})
     copy = self.dup
     copy.copy_attributes(attributes)
+    copy.save
+    ModelCopierLookups.instance.set(self, copy)
     copy
   end
 

@@ -10,6 +10,8 @@ class ModelCopier
     attributes = options.delete(:attributes) {{}}
     copied.copy_attributes attributes
     handle_options options.delete(:options) {{}}
+    copied.save unless original.new_record?
+    ModelCopierLookups.instance.set(original, copied)
     copy_associations options.delete(:associations) {[]}, attributes
     copied
   end
@@ -44,7 +46,6 @@ class ModelCopier
     end
 
     def copy(associations, attributes)
-      copied.save unless original.new_record?
       associations.each { |association| copy_association(association, attributes) }
     end
 
@@ -92,5 +93,33 @@ class ModelCopier
         attributes[attribute] = target.send(value) if value.is_a? Symbol
       end
     end
+  end
+end
+
+require 'singleton'
+
+class ModelCopierLookups
+  include Singleton
+  attr_reader :lookup_hash
+
+  def initialize
+    @lookup_hash = {}
+  end
+
+  def clear
+    @lookup_hash = {}
+  end
+
+  def set(original, copied)
+    type = original.class.name.underscore.to_sym
+    @lookup_hash[type] ||= {}
+    @lookup_hash[type][original.id] = copied.id
+  end
+
+  # ModelCopierLookups.lookup(:badges, 1)
+  def lookup(type, id)
+    return false unless type.present? && id.present?
+    return false unless @lookup_hash[type].present?
+    @lookup_hash[type][id]
   end
 end
