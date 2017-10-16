@@ -34,13 +34,6 @@
 
             = active_course_link_to decorative_glyph(:download) + "Import Grades", assignment_grades_importers_path(presenter.assignment), nil, "hide-for-small"
 
-            %li.hide-for-small
-              %a{:href => edit_assignment_rubrics_path(presenter.assignment) }
-                = decorative_glyph(:sliders)
-                - if presenter.grade_with_rubric?
-                  Edit Rubric
-                - else
-                  Create Rubric
-                - if presenter.course.institution.try(:has_google_access)
-                  = active_course_link_to decorative_glyph(:calendar) + "Add to Google Calendar",
-                    add_assignment_google_calendars_assignments_path(presenter.assignment), :target => "_parent",  method: :post
+            - if presenter.course.institution.try(:has_google_access)
+              = active_course_link_to decorative_glyph(:calendar) + "Add to Google Calendar",
+                add_assignment_google_calendars_assignments_path(presenter.assignment), :target => "_parent",  method: :post

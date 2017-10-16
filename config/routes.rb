@@ -112,7 +112,7 @@ Rails.application.routes.draw do
 
     resources :submissions, except: :index
 
-    resource :rubrics, only: [:edit, :destroy] do
+    resource :rubrics, only: :destroy do
       get :index_for_copy, on: :collection
       post :copy, on: :collection
       get :export, on: :collection

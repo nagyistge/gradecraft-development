@@ -1,15 +1,7 @@
 class RubricsController < ApplicationController
   before_action :ensure_staff?, except: [:export]
-  before_action :use_current_course, only: [:edit]
 
   respond_to :html, :json
-
-  def edit
-    @assignment = current_course.assignments.find params[:assignment_id]
-    @rubric = @assignment.find_or_create_rubric
-    @course_badge_count = @assignment.course.badges.visible.count
-    respond_with @rubric
-  end
 
   def destroy
     @rubric = @assignment.rubric
