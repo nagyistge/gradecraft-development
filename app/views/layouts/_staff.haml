@@ -16,7 +16,7 @@
         %h1.pagetitle= title
         = yield(:context_menu)
 
-    - unless current_user.onboarded? current_course
+    - if @show_tour || !current_user.onboarded?(current_course)
       = render partial: "info/staff_onboarding"
 
     = render partial: "layouts/content"

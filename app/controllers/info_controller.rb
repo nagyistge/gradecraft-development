@@ -1,8 +1,8 @@
 class InfoController < ApplicationController
   helper_method :sort_column, :sort_direction, :predictions
 
-  before_action :ensure_not_observer?, except: [:predictor, :syllabus]
-  before_action :ensure_staff?, except: [:dashboard, :predictor, :syllabus]
+  before_action :ensure_not_observer?, except: [:predictor, :syllabus, :tour]
+  before_action :ensure_staff?, except: [:dashboard, :predictor, :syllabus, :tour]
   before_action :find_team,
     only: [:earned_badges, :multiplier_choices]
   before_action :find_students,
@@ -25,6 +25,11 @@ class InfoController < ApplicationController
 
   # Display the grade predictor
   def predictor
+  end
+
+  def tour
+    session[:show_tour] = true
+    redirect_back_or_default
   end
 
   def earned_badges

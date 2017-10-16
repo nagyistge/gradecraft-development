@@ -31,6 +31,7 @@ class ApplicationController < ActionController::Base
   before_action :require_course_membership, except: [:not_authenticated]
   before_action :increment_page_views
   before_action :set_paper_trail_whodunnit
+  before_action :check_for_tour
 
   include ApplicationHelper
   include ImpersonationHelper
@@ -150,6 +151,13 @@ class ApplicationController < ActionController::Base
     return unless current_user && request.format.html?
     PageviewEventLogger.new(event_session)
                        .enqueue_in_with_fallback Lull.time_until_next_lull
+  end
+
+  def check_for_tour
+    if session[:show_tour] == true
+      session[:show_tour] = false
+      @show_tour = true
+    end
   end
 
   def time_zone(&block)

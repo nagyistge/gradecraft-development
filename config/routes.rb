@@ -242,6 +242,7 @@ Rails.application.routes.draw do
     get :per_assign
     get :research_gradebook
     get :syllabus
+    get :tour
   end
 
   controller :pages do

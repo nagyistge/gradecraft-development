@@ -42,7 +42,6 @@ if (m && p) {
 
     // list out the vars
     var mOverlay = getId('modal-window'),
-        mOpen = document.querySelectorAll('.modal-open')[1],
         mClose = getId('modal-close'),
         mAction = getId('modal-action'),
         modal = getId('modal-holder'),
@@ -63,11 +62,6 @@ if (m && p) {
       modalOpen = true;
       modal.setAttribute('tabindex', '0');
       modal.focus();
-    }
-
-    function modalReopen(event) {
-      event.preventDefault();
-      modalShow();
     }
 
     // binds to both the button click and the escape key to close the modal window
@@ -106,9 +100,6 @@ if (m && p) {
          modalClose(event);
        }
     }, false);
-
-    // open modal by link click/hit in account menu
-    mOpen.addEventListener('click', modalReopen);
 
     // close modal by btn click/hit
     mClose.addEventListener('click', modalClose);
