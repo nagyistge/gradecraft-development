@@ -91,6 +91,7 @@ class CoursesController < ApplicationController
         duplicated.course_memberships.create(user: current_user, role: current_role)
       end
       duplicated.recalculate_student_scores unless duplicated.student_count.zero?
+      Services::ResolvesCopiedLevelBadges.for_course course # some sort of service to resolve badges ids by matching on attributes
       session[:course_id] = duplicated.id
       redirect_to edit_course_path(duplicated.id), flash: {
         notice: "#{@course.name} successfully copied"
