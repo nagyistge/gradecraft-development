@@ -7,9 +7,12 @@
     vm.loading = true
     vm.RubricService = RubricService
 
+    vm.termFor = BadgeService.termFor
     vm.rubric = RubricService.rubric
     vm.criteria = RubricService.criteria
     vm.full_points = RubricService.full_points
+    vm.gradeWithRubric = RubricService.gradeWithRubric
+    vm.copyRubricPath = RubricService.copyRubricPath
 
     vm.badges = BadgeService.badges
 
@@ -22,7 +25,6 @@
     services(vm.rubricId).then(()->
       vm.loading = false
     )
-
   ]
 
   services = (rubricId)->

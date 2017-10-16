@@ -8,6 +8,8 @@
   rubric = {}
   criteria = []
   levels = []
+  _gradeWithRubric = undefined
+  _copyRubricPath = undefined
   _fullPoints = 0
 
   _editingBadgesId = null
@@ -21,12 +23,20 @@
           GradeCraftAPI.loadFromIncluded(levels, "levels", response.data)
           _fullPoints = response.data.meta.full_points
           GradeCraftAPI.logResponse(response.data)
+        gradeWithRubric(response.data.meta.grade_with_rubric)
+        copyRubricPath(response.data.meta.copy_rubric_path)
       ,(response) ->
         GradeCraftAPI.logResponse(response.data)
     )
 
   fullPoints = ()->
     _fullPoints
+
+  gradeWithRubric = (val) ->
+    if angular.isDefined(val) then (_gradeWithRubric = val) else _gradeWithRubric
+
+  copyRubricPath = (path) ->
+    if angular.isDefined(path) then (_copyRubricPath = path) else _copyRubricPath
 
   pointsAssigned = ()->
     # use sumBy if lodash version > 4.0
@@ -286,6 +296,8 @@
     rubric: rubric
     criteria: criteria
     levels: levels
+    gradeWithRubric: gradeWithRubric
+    copyRubricPath: copyRubricPath
     fullPoints: fullPoints
 
     pointsAssigned: pointsAssigned

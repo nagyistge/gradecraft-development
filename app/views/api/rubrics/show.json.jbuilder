@@ -28,6 +28,6 @@ end
 
 json.meta do
   json.full_points @rubric.assignment.full_points
+  json.grade_with_rubric @rubric.assignment.grade_with_rubric?
+  json.copy_rubric_path index_for_copy_assignment_rubrics_path @rubric.assignment
 end
-
-

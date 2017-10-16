@@ -28,7 +28,7 @@ class RubricsController < ApplicationController
     assignment.rubric.destroy if assignment.rubric.present?
 
     Rubric.find(params[:rubric_id]).copy(assignment_id: assignment.id)
-    redirect_to assignment_path(assignment),
+    redirect_to edit_assignment_path(assignment),
       notice: "Added rubric to #{(term_for :assignment).titleize} #{assignment.name}"
   end
 

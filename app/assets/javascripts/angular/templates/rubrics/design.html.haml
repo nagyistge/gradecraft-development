@@ -2,26 +2,30 @@
 
 %loading-message(loading='vm.loading' message="Loading Rubric...")
 
-.italic(ng-if="vm.criteria.length > 0")
-  %span What does "Set as 'meets expectations' mean?"
-  %span.has-tooltip
-    %i.fa.fa-info-circle
-    .display-on-hover.hover-style.hover-style-right
-      Adding this marker to a level sets a threshold so that all levels below it do not award any points
+%rubric(ng-if="!vm.loading")
+  .italic(ng-if="vm.criteria.length > 0")
+    %span What does "Set as 'meets expectations' mean?"
+    %span.has-tooltip
+      %i.fa.fa-info-circle
+      .display-on-hover.hover-style.hover-style-right
+        Adding this marker to a level sets a threshold so that all levels below it do not award any points
 
-%button.rubric-button(ng-if="vm.criteria.length > 1 && !vm.hasNewCriterion()" ng-click="toggleReordering()")
-  %i.fa.fa-fw.fa-arrows-v.criterion-drag-handle(ng-if="!reordering")
-  {{ orderButtonText() }}
+  %button.rubric-button(ng-if="vm.criteria.length > 1 && !vm.hasNewCriterion()" ng-click="toggleReordering()")
+    %i.fa.fa-fw.fa-arrows-v.criterion-drag-handle(ng-if="!reordering")
+    {{ orderButtonText() }}
 
-#criterion-box(ui-sortable ng-model="vm.criteria" ng-change="vm.updateOrder()")
+  #criterion-box(ui-sortable ng-model="vm.criteria" ng-change="vm.updateOrder()")
 
-  .rubric-container.divider(ng-repeat="criterion in vm.criteria")
-    %rubric-criterion(criterion="criterion" reordering="reordering")
+    .rubric-container.divider(ng-repeat="criterion in vm.criteria")
+      %rubric-criterion(criterion="criterion" reordering="reordering")
 
-%button(ng-if="vm.criteria.length > 1 && !vm.hasNewCriterion()" ng-click="toggleReordering()")
-  %i.fa.fa-fw.fa-arrows-v.criterion-drag-handle(ng-if="!reordering")
-  {{ orderButtonText() }}
+  %button(ng-if="vm.criteria.length > 1 && !vm.hasNewCriterion()" ng-click="toggleReordering()")
+    %i.fa.fa-fw.fa-arrows-v.criterion-drag-handle(ng-if="!reordering")
+    {{ orderButtonText() }}
 
-.divider
+  .divider
 
-%button.rubric-button(ng-if="!vm.hasNewCriterion() && !reordering" ng-click="vm.openNewCriterion()") Add Criterion
+  %a.button(ng-if="!vm.gradeWithRubric()" ng-href="{{vm.copyRubricPath()}}")
+    %i.fa.fa-sliders
+    Copy Rubric from Another {{vm.termFor("assignment")}}
+  %button.rubric-button(ng-if="!vm.hasNewCriterion() && !reordering" ng-click="vm.openNewCriterion()") Add Criterion
