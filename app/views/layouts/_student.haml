@@ -2,7 +2,7 @@
   / Display errors and notifications
   = render partial: "layouts/navigation/student_profile_tabs", locals: {nav_class: 'sub-nav'}
   %main.mainContent#main-content{role: "main"}
-    - if current_course.published
+    - if current_course.published || impersonating?
       .page-header
         %h1.pagetitle= title
       -# = render partial: "info/student_onboarding", locals:  { presenter: Info::DashboardCourseRulesPresenter.new(course: current_course, current_user: current_student) }
