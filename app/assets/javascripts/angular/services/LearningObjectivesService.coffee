@@ -12,8 +12,7 @@
   levelFlaggedValues = {}
 
   runAllEvents = (redirectUrl=null) ->
-    DebounceQueue.runAllEvents()  # should this return a $q.all promise to ensure success prior to redirect?
-    window.location.href = redirectUrl if redirectUrl?
+    DebounceQueue.runAllEvents(redirectUrl)
 
   objective = () ->
     _objectives[0]

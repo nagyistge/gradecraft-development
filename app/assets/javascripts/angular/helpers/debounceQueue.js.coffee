@@ -4,7 +4,7 @@
 # It can be cancelled and updated before fire,
 # or fired immediately, cancelling the standing delayed event.
 
-angular.module('helpers').factory('DebounceQueue', ['$timeout', ($timeout)->
+angular.module('helpers').factory('DebounceQueue', ['$timeout', '$q', ($timeout, $q)->
 
   queueStore = {}
 
@@ -35,10 +35,14 @@ angular.module('helpers').factory('DebounceQueue', ['$timeout', ($timeout)->
     return false if !queueStore[storeId]
     $timeout.cancel(queueStore[storeId].promise)
 
-  runAllEvents = ()->
+  runAllEvents = (redirectUrl=null)->
+    events = []
     _.each(queueStore, (queueItem) ->
       $timeout.cancel(queueItem.promise)
-      queueItem.event.apply(null, queueItem.args)
+      events.push(queueItem.event.apply(null, queueItem.args))
+    )
+    $q.all(events).then(() ->
+      window.location.href = redirectUrl if redirectUrl?
     )
 
   return {
@@ -47,4 +51,3 @@ angular.module('helpers').factory('DebounceQueue', ['$timeout', ($timeout)->
     runAllEvents: runAllEvents
   }
 ])
-
