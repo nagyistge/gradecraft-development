@@ -61,7 +61,7 @@ class UserSessionsController < ApplicationController
   end
 
   def impersonate_student
-    student = current_course.students.find(params[:student_id])
+    student = current_course.students.find(params[:student_id]) unless params[:student_id] == "0"
     impersonate! student
     redirect_to root_url
   end
