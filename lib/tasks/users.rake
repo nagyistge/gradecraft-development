@@ -24,4 +24,13 @@ namespace :users do
       puts "Made #{user.username} an admin on \"#{course.name}\""
     end
   end
+
+  desc "Add John Doe as default student for impersonating"
+  task add_john_doe_impersonation: :environment do
+    User.create! first_name: "John",
+      last_name: "Doe",
+      username: "john_doe_gradecraft",
+      email: "john_doe@gradecraft.com"
+    puts "Successfully created John Doe"
+  end
 end
