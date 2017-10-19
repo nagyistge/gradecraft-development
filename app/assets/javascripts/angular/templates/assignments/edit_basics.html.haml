@@ -22,7 +22,11 @@
     .form-item
       %label
         Individual or Group?
-        %select(ng-model="assignment.grade_scope" ng-change="updateAssignment()")
+        %span.has-tooltip(ng-if="assignment.has_submitted_submissions")
+          %i.fa.fa-info-circle
+          .display-on-hover.hover-style
+            This option cannot be changed until existing submissions are deleted.
+        %select(ng-model="assignment.grade_scope" ng-change="updateAssignment()" ng-disabled="assignment.has_submitted_submissions")
           %option(ng-repeat="scope in ['Individual', 'Group']" ng-selected="assignment.grade_scope == scope" value="{{scope}}"  ng-click="updateAssignment()") {{ scope }}
         .form-hint Do students do this individually or as a group?
     .form-flex-row(ng-if="assignment.grade_scope == 'Group'")
