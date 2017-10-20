@@ -50,10 +50,6 @@ if($('#course-index-table').length > 0 ) {
       }
     }).data('dynatable');
 
-  var lowestRank = $('#course-index-table tbody tr').has('.graded').last().find('td:eq(1)').text();
-  var bottom10Cutoff = lowestRank && parseInt(lowestRank) > 10 ? parseInt(lowestRank) - 10 : 0;
-  $('#course-index-table').data('bottom10Cutoff', bottom10Cutoff);
-
   var removeCourseIndexFilters = function() {
     dynatable.queries.remove('active');
     dynatable.queries.remove('inactive');
@@ -76,4 +72,10 @@ if($('#course-index-table').length > 0 ) {
   //start by hiding inactive courses in table since default button selected is active
   dynatable.queries.add('active');
   dynatable.process();
+
+  $(document).ready(function() {
+    var lowestRank = $('#course-index-table tbody tr').has('.graded').last().find('td:eq(1)').text();
+    var bottom10Cutoff = lowestRank && parseInt(lowestRank) > 10 ? parseInt(lowestRank) - 10 : 0;
+    $('#course-index-table').data('bottom10Cutoff', bottom10Cutoff);
+  });
 }
