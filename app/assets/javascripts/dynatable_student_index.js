@@ -46,10 +46,6 @@ if($('#student-index-table').length > 0 ) {
       }
     }).data('dynatable');
 
-  var lowestRank = $('#student-index-table tbody tr').has('.graded').last().find('td:eq(1)').text();
-  var bottom10Cutoff = lowestRank && parseInt(lowestRank) > 10 ? parseInt(lowestRank) - 10 : 0;
-  $('#student-index-table').data('bottom10Cutoff', bottom10Cutoff);
-
   var removeStudentIndexFilters = function() {
     dynatable.queries.remove('leaderboard');
     dynatable.queries.remove('active-students');
@@ -71,4 +67,10 @@ if($('#student-index-table').length > 0 ) {
   //start by hiding auditors in table since default button selected is leaderboard
   dynatable.queries.add('leaderboard');
   dynatable.process();
+
+  $(document).ready(function() {
+    var lowestRank = $('#student-index-table tbody tr').has('.graded').last().find('td:eq(1)').text();
+    var bottom10Cutoff = lowestRank && parseInt(lowestRank) > 10 ? parseInt(lowestRank) - 10 : 0;
+    $('#student-index-table').data('bottom10Cutoff', bottom10Cutoff);
+  });
 }
