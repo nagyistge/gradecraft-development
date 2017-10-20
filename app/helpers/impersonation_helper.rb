@@ -7,7 +7,7 @@ module ImpersonationHelper
 
   def impersonate!(user)
     self.impersonating_agent = current_user
-    user = user || IMPERSONATING_STUDENT
+    user ||= IMPERSONATING_STUDENT
     ensure_impersonated_course_access if user == IMPERSONATING_STUDENT
     auto_login user
   end

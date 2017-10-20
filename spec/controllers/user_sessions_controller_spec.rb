@@ -106,7 +106,7 @@ describe UserSessionsController do
 
   describe "exit_student_impersonation" do
     it "returns session to faculty" do
-      allow(subject).to receive(:login) { student }
+      allow(subject).to receive(:current_user).and_return student
       session[:impersonating_agent_id] = professor.id
       get :exit_student_impersonation
       expect(session[:impersonating_agent_id]).to be_nil
